@@ -59,8 +59,9 @@ pm2 set pm2-logrotate:rotateInterval '0 0 * * *' >/dev/null  # rotate daily at m
 # Step 6: Final verification
 PM2_VER=$(pm2 -v)
 
+echo "🔹 PM2 version installed: $PG_VER"
 echo "🔹 Log rotation active"
 echo "🔹 PM2 daemon enabled for user: $USER"
 echo "🔹 Processes will be restored automatically on reboot"
 
-echo -e "✅ PM2 installation and configuration complete (version $PM2_VER) \n\n"
+echo -e "✅ PM2 installation and configuration complete!" \n\n"

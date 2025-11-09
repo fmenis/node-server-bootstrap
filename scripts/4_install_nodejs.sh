@@ -22,4 +22,4 @@ fi
 echo "🔹 Node.js version: $(node -v)"
 echo "🔹 npm version: $(npm -v)"
 
-echo -e "✅ Node.js LTS installation complete \n\n\"
+echo -e "✅ Node.js LTS installation complete! \n\n"

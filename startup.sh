@@ -16,7 +16,7 @@ run_step() {
     local step_name="$1"
     local script_path="$2"
     
-    echo "✅ Running $step_name"
+    echo "🔄 Running $step_name"
     bash "$script_path"
     # echo "⏸️  Pausing for $PAUSE_SECONDS seconds..."
     sleep "$PAUSE_SECONDS"

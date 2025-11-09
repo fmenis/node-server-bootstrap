@@ -52,4 +52,4 @@ echo "🔹 Backend: $BACKEND_DIR"
 echo "🔹 Backend logs: $BACKEND_LOG_DIR"
 echo "🔹 Client:  $CLIENT_DIR"
 
-echo -e "✅ Project directories created successfully with web group access \n\n"
+echo -e "✅ Project directories created successfully with web group access! \n\n"

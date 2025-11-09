@@ -20,7 +20,7 @@ PACKAGES=(
 )
 
 # Step 1: Update package lists
-echo "🔄 Updating package lists..."
+echo "Updating package lists..."
 sudo apt-get update -y
 
 # Step 2: Install each package defensively
@@ -34,8 +34,7 @@ for pkg in "${PACKAGES[@]}"; do
 done
 
 # Step 3: Clean up
-echo "🧹 Cleaning up..."
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 
-echo -e "✅ Base packages installation complete \n\n"
+echo -e "✅ Base packages installation complete! \n\n"
