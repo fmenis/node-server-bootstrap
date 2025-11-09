@@ -43,6 +43,8 @@ run_step "install_postgres.sh" "$BASE_DIR/6_install_postgres.sh"
 # Step 7: Install Nginx
 run_step "install_nginx.sh" "$BASE_DIR/7_install_nginx.sh"
 
-echo -e "============================================== \n\n"
+echo -e "\n\n"
+
+echo "=============================================="
 echo "🎉 Full provisioning completed successfully!"
 echo "=============================================="

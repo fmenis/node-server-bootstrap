@@ -42,4 +42,4 @@ sudo apt-get install -y "postgresql-$PG_VERSION" "postgresql-contrib-$PG_VERSION
 PG_VER=$(psql -V | awk '{print $3}')
 echo "🔹 PostgreSQL version installed: $PG_VER"
 
-echo -e "✅ PostgreSQL installation complete \n\n"
+echo -e "✅ PostgreSQL installation complete! \n\n"
