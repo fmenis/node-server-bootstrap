@@ -15,6 +15,8 @@ PACKAGES=(
     gnupg                 # For adding PPAs
     lsb-release           # Detect distro release
     software-properties-common  # add-apt-repository support
+    net-tools
+    htop
 )
 
 # Step 1: Update package lists

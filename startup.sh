@@ -21,6 +21,10 @@ bash "$BASE_DIR/install_base.sh"
 echo "✅ Running install_node.sh"
 bash "$BASE_DIR/install_node.sh"
 
+# Step 4: Install PostgreSQL LTS
+echo "✅ Running install_postgres.sh"
+bash "$BASE_DIR/install_postgres.sh"
+
 echo "=============================================="
 echo "🎉 Full provisioning completed successfully!"
 echo "=============================================="
