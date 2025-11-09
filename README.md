@@ -12,7 +12,6 @@ This repository provides automated scripts and configurations to quickly bootstr
 - ✅ Pre-configured development tools
 - ✅ Consistent environment setup across machines
 - ✅ Version-controlled configuration files
-- ✅ Time-saving automation scripts
 - ✅ Easy to customize and extend
 
 ## Prerequisites
@@ -76,7 +75,7 @@ vagrant up
 ## Roadmap
 
 - [ ] Add configuration templates
-- [ ] Create interactive setup wizard
+- [ ] Ask main software (nodejs, postgres, etc) version (default last LTS)
 - [ ] Add rollback functionality
 
 ## License
