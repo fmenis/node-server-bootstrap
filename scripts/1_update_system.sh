@@ -27,4 +27,4 @@ echo "🧹 Cleaning up unnecessary packages..."
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 
-echo "✅ System update and cleanup complete"
+echo -e "✅ System update and cleanup complete \n\n"

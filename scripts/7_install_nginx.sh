@@ -28,4 +28,4 @@ sudo systemctl start nginx
 NGINX_VER=$(nginx -v 2>&1 | awk -F/ '{print $2}')
 echo "🔹 Nginx version installed: $NGINX_VER"
 
-echo "✅ Nginx installation complete"
+echo -e "✅ Nginx installation complete \n\n\"

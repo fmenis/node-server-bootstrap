@@ -38,4 +38,4 @@ echo "🧹 Cleaning up..."
 sudo apt-get autoremove -y
 sudo apt-get autoclean -y
 
-echo "✅ Base packages installation complete"
+echo -e "✅ Base packages installation complete \n\n"

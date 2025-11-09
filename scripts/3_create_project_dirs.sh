@@ -48,7 +48,8 @@ create_dir "$BACKEND_LOG_DIR" "$USER_NAME" "$WEB_GROUP" 775
 # Client directory (owner: sudo user, group: www-data)
 create_dir "$CLIENT_DIR" "$USER_NAME" "$WEB_GROUP" 775
 
-echo "✅ Project directories created successfully with web group access"
 echo "🔹 Backend: $BACKEND_DIR"
 echo "🔹 Backend logs: $BACKEND_LOG_DIR"
 echo "🔹 Client:  $CLIENT_DIR"
+
+echo -e "✅ Project directories created successfully with web group access \n\n"
