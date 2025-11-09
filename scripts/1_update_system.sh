@@ -5,7 +5,7 @@ trap 'echo "❌ Provisioning failed at line $LINENO"; exit 1' ERR
 echo "=== Updating and upgrading system packages ==="
 
 # Update package lists safely
-echo "🔄 Checking for package updates..."
+echo "Checking for package updates..."
 if sudo apt-get update -y; then
     echo "Package lists updated"
 else
@@ -14,7 +14,7 @@ else
 fi
 
 # Upgrade installed packages safely
-echo "🔄 Upgrading installed packages..."
+echo "Upgrading installed packages..."
 if sudo apt-get upgrade -y; then
     echo "Packages upgraded"
 else
