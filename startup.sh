@@ -13,6 +13,14 @@ echo "=============================================="
 echo "✅ Running update_system.sh"
 bash "$BASE_DIR/update_system.sh"
 
+# Step 2: Install base packages (curl, git, etc.)
+echo "✅ Running install_base.sh"
+bash "$BASE_DIR/install_base.sh"
+
+# Step 3: Install Node.js LTS
+echo "✅ Running install_node.sh"
+bash "$BASE_DIR/install_node.sh"
+
 echo "=============================================="
 echo "🎉 Full provisioning completed successfully!"
 echo "=============================================="
