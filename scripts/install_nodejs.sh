@@ -2,41 +2,24 @@
 set -euo pipefail
 trap 'echo "❌ Node.js installation failed at line $LINENO"; exit 1' ERR
 
-echo "=== Installing NVM & Node.js LTS ==="
+echo "=== Installing Node.js LTS via NodeSource PPA ==="
 
-NVM_DIR="${HOME}/.nvm"
-
-# Step 1: Install NVM if not already installed
-if [ ! -d "$NVM_DIR" ]; then
-    echo "🔹 NVM not found, installing..."
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+# Step 0: Check if Node.js is already installed
+if command -v node &>/dev/null; then
+    NODE_VER=$(node -v)
+    echo "🔹 Node.js already installed: $NODE_VER"
 else
-    echo "🔹 NVM already installed"
+    # Step 1: Add NodeSource LTS repository
+    echo "🔹 Adding NodeSource Node.js LTS repository..."
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+
+    # Step 2: Install Node.js
+    echo "🔹 Installing Node.js..."
+    sudo apt-get install -y nodejs
 fi
 
-# Step 2: Run NVM commands in a login shell to avoid PATTERN errors
-echo "🔹 Installing latest Node.js LTS and setting default..."
-
-bash -l -c '
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-# Install latest LTS Node.js if not installed
-NODE_LTS_VERSION=$(nvm ls-remote --lts | tail -1 | awk "{print \$1}")
-if nvm ls "$NODE_LTS_VERSION" >/dev/null 2>&1; then
-    echo "🔹 Node.js $NODE_LTS_VERSION already installed"
-else
-    echo "🔹 Installing Node.js $NODE_LTS_VERSION"
-    nvm install --lts
-fi
-
-# Set default LTS
-nvm alias default "$NODE_LTS_VERSION"
-nvm use default
-
-# Print Node and npm versions
+# Step 3: Print Node.js and npm versions
 echo "🔹 Node.js version: $(node -v)"
 echo "🔹 npm version: $(npm -v)"
-'
 
 echo "✅ Node.js LTS installation complete"
