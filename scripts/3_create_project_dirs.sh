@@ -2,25 +2,30 @@
 set -euo pipefail
 trap 'echo "❌ Directory creation failed at line $LINENO"; exit 1' ERR
 
-echo "=== Creating project directories ==="
+echo "=== Creating project directories with proper permissions ==="
 
-# === CONFIGURATION ===
-BACKEND_PROJECT_NAME="my_backend_app"
-CLIENT_PROJECT_NAME="my_client_app"
+# Prompt user for project names
+read -rp "Enter backend project name (default: my_backend_app): " BACKEND_PROJECT_NAME
+BACKEND_PROJECT_NAME=${BACKEND_PROJECT_NAME:-my_backend_app}
+
+read -rp "Enter client project name (default: my_client_app): " CLIENT_PROJECT_NAME
+CLIENT_PROJECT_NAME=${CLIENT_PROJECT_NAME:-my_client_app}
 
 # User that will own the files (typically the sudoer)
 USER_NAME="${SUDO_USER:-$USER}"
+WEB_GROUP="www-data"
 
 # Directories
 BACKEND_DIR="/opt/$BACKEND_PROJECT_NAME"
 CLIENT_DIR="/var/www/$CLIENT_PROJECT_NAME"
 BACKEND_LOG_DIR="/var/logs/$BACKEND_PROJECT_NAME"
 
-# Function to create directory if missing
+# Function to create directory if missing and set ownership & permissions
 create_dir() {
     local dir_path="$1"
     local owner="$2"
-    local mode="$3"
+    local group="$3"
+    local mode="$4"
 
     if [ ! -d "$dir_path" ]; then
         echo "🔹 Creating $dir_path"
@@ -29,21 +34,21 @@ create_dir() {
         echo "🔹 Directory $dir_path already exists"
     fi
 
-    echo "🔹 Setting owner to $owner and permissions to $mode"
-    sudo chown "$owner":"$owner" "$dir_path"
+    echo "🔹 Setting owner:$owner, group:$group, permissions:$mode"
+    sudo chown "$owner:$group" "$dir_path"
     sudo chmod "$mode" "$dir_path"
 }
 
-# Create backend directory
-create_dir "$BACKEND_DIR" "$USER_NAME" 755
+# Backend directory (owner: sudo user, group: www-data)
+create_dir "$BACKEND_DIR" "$USER_NAME" "$WEB_GROUP" 775
 
-# Create backend logs directory
-create_dir "$BACKEND_LOG_DIR" "$USER_NAME" 755
+# Backend logs directory (owner: sudo user, group: www-data)
+create_dir "$BACKEND_LOG_DIR" "$USER_NAME" "$WEB_GROUP" 775
 
-# Create client directory
-create_dir "$CLIENT_DIR" "$USER_NAME" 755
+# Client directory (owner: sudo user, group: www-data)
+create_dir "$CLIENT_DIR" "$USER_NAME" "$WEB_GROUP" 775
 
-echo "✅ Project directories created successfully"
+echo "✅ Project directories created successfully with web group access"
 echo "🔹 Backend: $BACKEND_DIR"
 echo "🔹 Backend logs: $BACKEND_LOG_DIR"
 echo "🔹 Client:  $CLIENT_DIR"
