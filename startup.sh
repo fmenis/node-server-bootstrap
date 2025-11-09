@@ -28,16 +28,19 @@ run_step "update_system.sh" "$BASE_DIR/update_system.sh"
 # Step 2: Install base packages (curl, git, etc.)
 run_step "install_base.sh" "$BASE_DIR/install_base.sh"
 
-# Step 3: Install Node.js LTS
+# Step 3: Create project directories
+run_step "install_base.sh" "$BASE_DIR/create_project_dirs.sh"
+
+# Step 4: Install Node.js LTS
 run_step "install_node.sh" "$BASE_DIR/install_node.sh"
 
-# Step 4: Install and configure PM2
+# Step 5: Install and configure PM2
 run_step "install_pm2.sh" "$BASE_DIR/install_pm2.sh"
 
-# Step 5: Install PostgreSQL LTS
+# Step 6: Install PostgreSQL LTS
 run_step "install_postgres.sh" "$BASE_DIR/install_postgres.sh"
 
-# Step 6: Install Nginx
+# Step 7: Install Nginx
 run_step "install_nginx.sh" "$BASE_DIR/install_nginx.sh"
 
 echo "=============================================="
