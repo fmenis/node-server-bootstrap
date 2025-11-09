@@ -25,6 +25,10 @@ bash "$BASE_DIR/install_node.sh"
 echo "✅ Running install_postgres.sh"
 bash "$BASE_DIR/install_postgres.sh"
 
+# Step 5: Install Nginx
+echo "✅ Running install_nginx.sh"
+bash "$BASE_DIR/install_nginx.sh"
+
 echo "=============================================="
 echo "🎉 Full provisioning completed successfully!"
 echo "=============================================="
