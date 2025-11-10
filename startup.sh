@@ -49,7 +49,14 @@ run_step "install_nginx.sh" "$INSTALLATION_BASE_DIR/install_nginx.sh"
 
 ### ------------------------ CONFIGURATIONS ------------------------
 
+# Step 8: Create database and configure role
 run_step "create_db.sh" "$CONFIGURATION_BASE_DIR/create_db.sh"
+
+# Step 9: Create reverse proxy
+run_step "nginx_server_blocks.sh" "$CONFIGURATION_BASE_DIR/nginx_server_blocks.sh"
+
+# Step 10: Configure UFW
+run_step "enable_ufw.sh" "$CONFIGURATION_BASE_DIR/enable_ufw.sh"
 
 echo -e "\n"
 

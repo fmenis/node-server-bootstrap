@@ -2,7 +2,7 @@
 set -euo pipefail
 trap 'echo "❌ Proxy configuration failed at line $LINENO"; exit 1' ERR
 
-echo "=== NGINX SERVER BLOCK CREATION ==="
+echo -e "=== NGINX SERVER BLOCK CREATION === \n"
 
 # --- Remove default nginx site ---
 DEFAULT_ENABLED="/etc/nginx/sites-enabled/default"
@@ -11,7 +11,6 @@ if [[ -L "$DEFAULT_ENABLED" || -f "$DEFAULT_ENABLED" ]]; then
     sudo rm -f "$DEFAULT_ENABLED"
     echo "Default site removed"
 fi
-echo
 
 # --- Ask for input values ---
 read -rp "Enter the SERVER_NAME (e.g. example.com): " SERVER_NAME
@@ -22,11 +21,10 @@ echo
 AVAILABLE_PATH="/etc/nginx/sites-available/${CONFIG_FILENAME}"
 ENABLED_PATH="/etc/nginx/sites-enabled/${CONFIG_FILENAME}"
 
-echo "Creating nginx configuration for:"
+echo "⚙️ Creating nginx configuration for:"
 echo "   SERVER_NAME: $SERVER_NAME"
 echo "   PROXY_PORT:  $PROXY_PORT"
-echo "   FILENAME:    $CONFIG_FILENAME"
-echo
+echo -e"   FILENAME:    $CONFIG_FILENAME \n"
 
 # --- Check for existing file ---
 if [[ -f "$AVAILABLE_PATH" ]]; then
@@ -36,7 +34,7 @@ if [[ -f "$AVAILABLE_PATH" ]]; then
 fi
 
 # --- Create configuration file ---
-echo "Writing nginx configuration file..."
+echo "⚙️ Writing nginx configuration file..."
 sudo tee "$AVAILABLE_PATH" > /dev/null <<EOF
 server {
     listen 80;
@@ -62,18 +60,16 @@ server {
     }
 }
 EOF
-echo "Config file created at $AVAILABLE_PATH"
-echo
+echo -e "Config file created at $AVAILABLE_PATH \n"
 
 # --- Create symbolic link ---
-echo "🔗 Linking configuration to sites-enabled..."
+echo "⚙️ Linking configuration to sites-enabled..."
 if [[ -L "$ENABLED_PATH" ]]; then
-    echo "ℹSymlink already exists: $ENABLED_PATH"
+    echo -e "ℹSymlink already exists: $ENABLED_PATH \n"
 else
     sudo ln -s "$AVAILABLE_PATH" "$ENABLED_PATH"
-    echo "Symlink created: $ENABLED_PATH"
+    echo "Symlink created: $ENABLED_PATH \n"
 fi
-echo
 
 ## TODO test on a real vps
 # # --- HTTPS setup with Certbot ---
@@ -98,7 +94,7 @@ echo
 # echo
 
 # --- Test nginx configuration ---
-echo "🔍 Testing nginx configuration syntax..."
+echo "⚙️ Testing nginx configuration syntax..."
 if sudo nginx -t; then
     echo "Nginx configuration syntax is valid"
 else
@@ -108,7 +104,7 @@ fi
 echo
 
 # --- Reload nginx once at the end ---
-echo "🔄 Reloading nginx service..."
+echo "⚙️ Reloading nginx service..."
 sudo systemctl reload nginx.service
 echo "Nginx reloaded successfully"
 echo
