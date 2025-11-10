@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 trap 'echo "❌ Base package installation failed at line $LINENO"; exit 1' ERR
 
@@ -17,6 +18,8 @@ PACKAGES=(
     software-properties-common  # add-apt-repository support
     net-tools
     htop
+    certbot
+    python3-certbot-nginx
 )
 
 # Step 1: Update package lists

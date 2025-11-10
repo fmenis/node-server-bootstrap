@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 trap 'echo "❌ PostgreSQL installation failed at line $LINENO"; exit 1' ERR
 

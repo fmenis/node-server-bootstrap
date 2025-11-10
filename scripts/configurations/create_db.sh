@@ -4,9 +4,7 @@
 # This script automates the creation of a PostgreSQL role and database
 
 set -euo pipefail
-trap 'echo "❌ Provisioning failed at line $LINENO"; exit 1' ERR
-
-echo "=== Create role and database ==="
+trap 'echo "❌ Create role and database at line $LINENO"; exit 1' ERR
 
 # Color codes for output
 RED='\033[0;31m'
@@ -26,12 +24,6 @@ print_error() {
 print_warning() {
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
-
-# Check if user has sudo privileges (will be needed for su - postgres)
-if ! sudo -n true 2>/dev/null; then
-    print_warning "This script requires sudo privileges to switch to postgres user"
-    print_info "You may be prompted for your password"
-fi
 
 # Prompt for role name
 read -p "Enter the role name: " role_name
