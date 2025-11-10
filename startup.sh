@@ -32,30 +32,33 @@ run_step "update_system.sh" "$INSTALLATION_BASE_DIR/update_system.sh"
 # Step 2: Install base packages (curl, git, etc.)
 run_step "install_base.sh" "$INSTALLATION_BASE_DIR/install_base.sh"
 
-# Step 3: Create project directories
-run_step "install_base.sh" "$INSTALLATION_BASE_DIR/create_project_dirs.sh"
+# Step 3: Create ssh keys
+run_step "create_ssh_keys.sh" "$INSTALLATION_BASE_DIR/create_ssh_keys.sh"
 
-# Step 4: Install Node.js LTS
+# Step 4: Create project directories
+run_step "create_project_dirs.sh" "$INSTALLATION_BASE_DIR/create_project_dirs.sh"
+
+# Step 5: Install Node.js LTS
 run_step "install_node.sh" "$INSTALLATION_BASE_DIR/install_nodejs.sh"
 
-# Step 5: Install and configure PM2
+# Step 6: Install and configure PM2
 run_step "install_pm2.sh" "$INSTALLATION_BASE_DIR/install_pm2.sh"
 
-# Step 6: Install PostgreSQL LTS
+# Step 7: Install PostgreSQL LTS
 run_step "install_postgres.sh" "$INSTALLATION_BASE_DIR/install_postgres.sh"
 
-# Step 7: Install Nginx
+# Step 8: Install Nginx
 run_step "install_nginx.sh" "$INSTALLATION_BASE_DIR/install_nginx.sh"
 
 ### ------------------------ CONFIGURATIONS ------------------------
 
-# Step 8: Create database and configure role
+# Step 9: Create database and configure role
 run_step "create_db.sh" "$CONFIGURATION_BASE_DIR/create_db.sh"
 
-# Step 9: Create reverse proxy
+# Step 10: Create reverse proxy
 run_step "nginx_server_blocks.sh" "$CONFIGURATION_BASE_DIR/nginx_server_blocks.sh"
 
-# Step 10: Configure UFW
+# Step 11: Configure UFW
 run_step "enable_ufw.sh" "$CONFIGURATION_BASE_DIR/enable_ufw.sh"
 
 echo -e "\n"
