@@ -94,7 +94,7 @@ if [ $? -eq 0 ]; then
     print_info "Found pg_hba.conf at: $PG_HBA_CONF"
     
     # Check if the entry already exists
-    if sudo grep -q "host.*${db_name}.*${role_name}.*127.0.0.1/32.*scram-sha-256" "$PG_HBA_CONF"; then
+    if sudo grep -q "local.*${db_name}.*${role_name}.*127.0.0.1/32.*scram-sha-256" "$PG_HBA_CONF"; then
         print_warning "Authentication rule already exists in pg_hba.conf"
     else
         # Backup pg_hba.conf
@@ -102,7 +102,7 @@ if [ $? -eq 0 ]; then
         print_info "Created backup of pg_hba.conf"
         
         # Add the new rule
-        echo "host    ${db_name}    ${role_name}    scram-sha-256" | sudo tee -a "$PG_HBA_CONF" > /dev/null
+        echo "local    ${db_name}    ${role_name}    scram-sha-256" | sudo tee -a "$PG_HBA_CONF" > /dev/null
         print_info "Added authentication rule to pg_hba.conf"
         
         # Reload PostgreSQL configuration
