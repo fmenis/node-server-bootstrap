@@ -40,6 +40,13 @@ server {
     listen 80;
     server_name ${SERVER_NAME};
 
+    # Default location (serves static file)
+    location / {
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        try_files $uri $uri/ =404;
+    }
+
     # API reverse proxy to localhost:${PROXY_PORT}
     location /api {
         proxy_pass http://localhost:${PROXY_PORT};
@@ -51,12 +58,7 @@ server {
         proxy_set_header Host \$host;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Host \$host:\$server_port;
-    }
-
-    # Default location (serves static file)
-    location / {
-        root /var/www/html;
-        try_files /index.nginx-debian.html =404;
+        proxy_cache_bypass $http_upgrade;
     }
 }
 EOF
