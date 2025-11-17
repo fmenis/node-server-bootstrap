@@ -71,27 +71,26 @@ else
     echo "Symlink created: $ENABLED_PATH \n"
 fi
 
-## TODO test on a real vps
-# # --- HTTPS setup with Certbot ---
-# echo "=== HTTPS SETUP WITH CERTBOT ==="
+# --- HTTPS setup with Certbot ---
+echo "=== HTTPS SETUP WITH CERTBOT ==="
 
-# if command -v certbot &>/dev/null; then
-#     echo "🔐 Requesting SSL certificate for ${SERVER_NAME}..."
-#     if sudo certbot --nginx -d "${SERVER_NAME}" --non-interactive --agree-tos -m admin@"${SERVER_NAME}" --redirect; then
-#         echo "HTTPS successfully enabled for ${SERVER_NAME}"
+if command -v certbot &>/dev/null; then
+    echo "🔐 Requesting SSL certificate for ${SERVER_NAME}..."
+    if sudo certbot --nginx -d "${SERVER_NAME}" --non-interactive --agree-tos -m admin@"${SERVER_NAME}" --redirect; then
+        echo "HTTPS successfully enabled for ${SERVER_NAME}"
 
-#         # --- Configure auto-renewal using systemd timer ---
-#         echo "🕒 Enabling certbot systemd timer for auto-renewal..."
-#         sudo systemctl enable --now certbot.timer
-#         echo "Certbot systemd timer enabled"
+        # --- Configure auto-renewal using systemd timer ---
+        echo "🕒 Enabling certbot systemd timer for auto-renewal..."
+        sudo systemctl enable --now certbot.timer
+        echo "Certbot systemd timer enabled"
 
-#     else
-#         echo "⚠️ Certbot failed to obtain certificate"
-#     fi
-# else
-#     echo "⚠️ Certbot not found! Skipping HTTPS setup."
-# fi
-# echo
+    else
+        echo "⚠️ Certbot failed to obtain certificate"
+    fi
+else
+    echo "⚠️ Certbot not found! Skipping HTTPS setup."
+fi
+echo
 
 # --- Test nginx configuration ---
 echo "⚙️ Testing nginx configuration syntax..."
