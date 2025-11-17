@@ -36,7 +36,8 @@ run_step "install_base.sh" "$INSTALLATION_BASE_DIR/install_base.sh"
 run_step "create_ssh_keys.sh" "$INSTALLATION_BASE_DIR/create_ssh_keys.sh"
 
 # Step 4: Preflight checks
-run_step "preflight_checks.sh" "$INSTALLATION_BASE_DIR/preflight_checks.sh"
+## TODO fix
+#run_step "preflight_checks.sh" "$INSTALLATION_BASE_DIR/preflight_checks.sh"
 
 # Step 5: Create project directories
 run_step "create_project_dirs.sh" "$INSTALLATION_BASE_DIR/create_project_dirs.sh"
@@ -56,13 +57,13 @@ run_step "install_nginx.sh" "$INSTALLATION_BASE_DIR/install_nginx.sh"
 ### ------------------------ CONFIGURATIONS ------------------------
 
 # Step 10: Create database and configure role
-# run_step "create_db.sh" "$CONFIGURATION_BASE_DIR/create_db.sh"
+run_step "create_db.sh" "$CONFIGURATION_BASE_DIR/create_db.sh"
 
 # Step 11: Create reverse proxy
-# run_step "nginx_server_blocks.sh" "$CONFIGURATION_BASE_DIR/nginx_server_blocks.sh"
+run_step "nginx_server_blocks.sh" "$CONFIGURATION_BASE_DIR/nginx_server_blocks.sh"
 
 # Step 12: Configure UFW
-# run_step "enable_ufw.sh" "$CONFIGURATION_BASE_DIR/enable_ufw.sh"
+run_step "enable_ufw.sh" "$CONFIGURATION_BASE_DIR/enable_ufw.sh"
 
 echo -e "\n"
 

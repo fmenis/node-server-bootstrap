@@ -47,5 +47,5 @@ if [[ "$RUN_CHECKS" == "y" ]]; then
 
     echo -e "✅ Pre-flight checks passed! \n\n"
 else
-    echo "Skipping pre-flight checks. Continuing with provisioning...\n\n"
+    echo -e "Skipping pre-flight checks. Continuing with provisioning...\n\n"
 fi

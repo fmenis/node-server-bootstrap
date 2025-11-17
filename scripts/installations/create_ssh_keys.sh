@@ -11,13 +11,15 @@ read -rp "Enter the email to associate with the SSH key: " SSH_EMAIL
 read -rsp "Enter passphrase for SSH key (leave empty for no passphrase): " SSH_PASSPHRASE
 echo
 
-# --- Start ssh-agent if not running ---
-if ! pgrep -u "$USER" ssh-agent >/dev/null; then
-    echo "🚀 Starting ssh-agent..."
+echo "=== Checking ssh-agent availability ==="
+
+# --- Check if ssh-agent is reachable ---
+if ! ssh-add -l >/dev/null 2>&1; then
+    echo "⚠️  ssh-agent not reachable. Starting a new agent..."
     eval "$(ssh-agent -s)"
     echo "ssh-agent started"
 else
-    echo "ssh-agent is already running"
+    echo "ssh-agent is reachable"
 fi
 echo
 
@@ -43,7 +45,7 @@ echo "🔗 Copy this key and add it to your GitHub account (https://github.com/s
 read -rp "Press ENTER after you have added the key to GitHub to continue..." _
 
 # --- Add the key to the ssh-agent ---
-if ssh-add -l | grep -q "$ED25519_KEY"; then
+if ssh-add -l 2>/dev/null | grep -q "$ED25519_KEY"; then
     echo "SSH key '$ED25519_KEY' is already added to the agent"
 else
     echo "🔑 Adding SSH key '$ED25519_KEY' to ssh-agent..."
