@@ -102,7 +102,7 @@ if [ $? -eq 0 ]; then
         print_info "Created backup of pg_hba.conf"
         
         # Add the new rule
-        echo "host    ${db_name}    ${role_name}    127.0.0.1/32    scram-sha-256" | sudo tee -a "$PG_HBA_CONF" > /dev/null
+        echo "host    ${db_name}    ${role_name}    scram-sha-256" | sudo tee -a "$PG_HBA_CONF" > /dev/null
         print_info "Added authentication rule to pg_hba.conf"
         
         # Reload PostgreSQL configuration
