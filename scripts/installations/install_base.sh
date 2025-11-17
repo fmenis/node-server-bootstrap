@@ -20,6 +20,7 @@ PACKAGES=(
     htop
     certbot
     python3-certbot-nginx
+    apache2-utils
 )
 
 # Step 1: Update package lists
