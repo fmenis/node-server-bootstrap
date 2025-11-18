@@ -36,8 +36,7 @@ run_step "install_base.sh" "$INSTALLATION_BASE_DIR/install_base.sh"
 run_step "create_ssh_keys.sh" "$INSTALLATION_BASE_DIR/create_ssh_keys.sh"
 
 # Step 4: Preflight checks
-## TODO fix
-#run_step "preflight_checks.sh" "$INSTALLATION_BASE_DIR/preflight_checks.sh"
+run_step "preflight_checks.sh" "$INSTALLATION_BASE_DIR/preflight_checks.sh"
 
 # Step 5: Create project directories
 run_step "create_project_dirs.sh" "$INSTALLATION_BASE_DIR/create_project_dirs.sh"
