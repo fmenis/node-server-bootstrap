@@ -44,7 +44,7 @@ server {
     location / {
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
-        try_files $uri $uri/ =404;
+        try_files \$uri \$uri/ =404;
     }
 
     # API reverse proxy to localhost:${PROXY_PORT}
@@ -58,7 +58,7 @@ server {
         proxy_set_header Host \$host;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Host \$host:\$server_port;
-        proxy_cache_bypass $http_upgrade;
+        proxy_cache_bypass \$http_upgrade;
     }
 }
 EOF
