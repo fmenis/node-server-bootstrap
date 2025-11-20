@@ -18,8 +18,6 @@ PACKAGES=(
     software-properties-common  # add-apt-repository support
     net-tools
     htop
-    certbot
-    python3-certbot-nginx
     apache2-utils
 )
 
