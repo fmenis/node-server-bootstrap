@@ -53,15 +53,18 @@ run_step "install_postgres.sh" "$INSTALLATION_BASE_DIR/install_postgres.sh"
 # Step 9: Install Nginx
 run_step "install_nginx.sh" "$INSTALLATION_BASE_DIR/install_nginx.sh"
 
+# Step 10: Install Redis
+run_step "install_redis.sh" "$INSTALLATION_BASE_DIR/install_redis.sh"
+
 ### ------------------------ CONFIGURATIONS ------------------------
 
-# Step 10: Create database and configure role
+# Step 11: Create database and configure role
 run_step "create_db.sh" "$CONFIGURATION_BASE_DIR/create_db.sh"
 
-# Step 11: Create reverse proxy
+# Step 12: Create reverse proxy
 run_step "nginx_server_blocks.sh" "$CONFIGURATION_BASE_DIR/nginx_server_blocks.sh"
 
-# Step 12: Configure UFW
+# Step 13: Configure UFW
 run_step "enable_ufw.sh" "$CONFIGURATION_BASE_DIR/enable_ufw.sh"
 
 echo -e "\n"
