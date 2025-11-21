@@ -80,5 +80,27 @@ sudo systemctl daemon-reload
 sudo systemctl enable fastify-app
 sudo systemctl start fastify-app
 
+echo "✅ Fastify service started"
+
+# -------------------------------------------
+# NEW: Allow passwordless restart via sudoers
+# -------------------------------------------
+
+SUDOERS_FILE="/etc/sudoers.d/fastify-app-restart"
+
+echo "Creating sudoers exception for GitHub Actions user..."
+
+sudo tee "$SUDOERS_FILE" > /dev/null <<EOF
+$SYSTEM_USER ALL=NOPASSWD: /bin/systemctl restart fastify-app.service
+EOF
+
+sudo chmod 440 "$SUDOERS_FILE"
+
+echo "✅ Added secure sudoers rule at $SUDOERS_FILE"
+echo "GitHub Actions can now run:"
+echo "  sudo systemctl restart fastify-app.service"
+echo "without requiring a password."
+
+echo
 echo "Check logs with: sudo journalctl -u fastify-app -f"
 echo "✅ Fastify service started and enabled at boot"

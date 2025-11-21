@@ -60,7 +60,7 @@ LOG_LEVEL=${LOG_LEVEL:-debug}
 read -rp "Enter PG_HOST (default: localhost): " PG_HOST
 PG_HOST=${PG_HOST:-localhost}
 
-read -rp "Enter PG_PORT (default: 6432): " PG_PORT
+read -rp "Enter PG_PORT (default: 5432): " PG_PORT
 PG_PORT=${PG_PORT:-5432}
 
 read -rp "Enter PG_DB (default: test): " PG_DB
