@@ -33,13 +33,13 @@ if [[ "$RUN_CHECKS" == "y" ]]; then
     # --- Ask for domain name to test ---
     read -rp "Enter the domain to check (e.g., example.com): " DOMAIN
 
-    # --- Test if domain resolves via DNS ---
-    echo "🌐 Checking DNS resolution for $DOMAIN..."
-    if ! host "$DOMAIN" >/dev/null 2>&1; then
-        echo "⚠️ Domain '$DOMAIN' could not be resolved. Check your DNS settings."
+    # --- Test if domain resolves via system resolver (IPv4 only) ---
+    echo "🌐 Checking DNS resolution for $DOMAIN (system resolver)..."
+    if ! getent hosts "$DOMAIN" | awk '$1 ~ /^[0-9]+\./ {print $1}' >/dev/null; then
+        echo "⚠️ Domain '$DOMAIN' could not be resolved via system resolver."
         exit 1
     fi
-    echo "✅ Domain resolves via DNS"
+    echo "✅ Domain resolves via system resolver"
 
     # --- Test if domain is reachable (HTTP ping) ---
     echo "🔄 Testing if domain '$DOMAIN' is reachable..."

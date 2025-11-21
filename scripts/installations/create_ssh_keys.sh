@@ -4,8 +4,9 @@ trap 'echo "❌ SSH agent setup failed at line $LINENO"; exit 1' ERR
 
 echo "=== SSH keys SETUP ==="
 
-# --- Ask for email for SSH key ---
-read -rp "Enter the email to associate with the SSH key: " SSH_EMAIL
+# --- Ask for email for SSH key (with default) ---
+read -rp "Enter the email to associate with the SSH key [default: filippomeniswork@gmail.com]: " SSH_EMAIL
+SSH_EMAIL=${SSH_EMAIL:-filippomeniswork@gmail.com}
 
 # --- Ask for passphrase (optional) ---
 read -rsp "Enter passphrase for SSH key (leave empty for no passphrase): " SSH_PASSPHRASE
@@ -36,22 +37,3 @@ else
     echo "ED25519 SSH key already exists: $ED25519_KEY"
 fi
 echo
-
-# --- Print public key for GitHub ---
-echo "📋 Your public SSH key is:"
-cat "$ED25519_PUB"
-echo
-echo "🔗 Copy this key and add it to your GitHub account (https://github.com/settings/keys)."
-read -rp "Press ENTER after you have added the key to GitHub to continue..." _
-
-# --- Add the key to the ssh-agent ---
-if ssh-add -l 2>/dev/null | grep -q "$ED25519_KEY"; then
-    echo "SSH key '$ED25519_KEY' is already added to the agent"
-else
-    echo "🔑 Adding SSH key '$ED25519_KEY' to ssh-agent..."
-    ssh-add "$ED25519_KEY"
-    echo "SSH key added to agent"
-fi
-echo
-
-echo -e "✅ SSH keys setup complete! \n\n"
