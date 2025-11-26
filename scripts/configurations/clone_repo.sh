@@ -48,6 +48,9 @@ APP_ENV=${APP_ENV:-development}
 read -rp "Enter APP_NAME (default: dev-api): " APP_NAME
 APP_NAME=${APP_NAME:-dev-api}
 
+read -rp "Enter API_DOMAIN (default: api.filippomenis.it): " API_DOMAIN
+API_DOMAIN=${API_DOMAIN:-api.filippomenis.it}
+
 read -rp "Enter SERVER_ADDRESS (default: localhost): " SERVER_ADDRESS
 SERVER_ADDRESS=${SERVER_ADDRESS:-localhost}
 
@@ -57,20 +60,18 @@ SERVER_PORT=${SERVER_PORT:-3000}
 read -rp "Enter LOG_LEVEL (default: debug): " LOG_LEVEL
 LOG_LEVEL=${LOG_LEVEL:-debug}
 
-read -rp "Enter PG_HOST (default: localhost): " PG_HOST
-PG_HOST=${PG_HOST:-localhost}
+read -rp "Enter DATABASE_URL: " DATABASE_URL
 
-read -rp "Enter PG_PORT (default: 5432): " PG_PORT
-PG_PORT=${PG_PORT:-5432}
+read -rp "Enter REDIS_HOST (default: localhost): " REDIS_HOST
+REDIS_HOST=${REDIS_HOST:-localhost}
 
-read -rp "Enter PG_DB (default: test): " PG_DB
-PG_DB=${PG_DB:-test}
+read -rp "Enter REDIS_PORT (default: 6379): " REDIS_PORT
+REDIS_PORT=${REDIS_PORT:-6379}
 
-read -rp "Enter PG_USER (default: dev): " PG_USER
-PG_USER=${PG_USER:-dev}
+read -rp "Enter SENTRY_ENABLED (default: false): " SENTRY_ENABLED
+SENTRY_ENABLED=${SENTRY_ENABLED:-false}
 
-read -rsp "Enter PG_PW: " PG_PW
-echo
+read -rp "Enter SENTRY_DSN: " SENTRY_DSN
 
 # Write .env
 cat <<EOF > "$ENV_FILE"
